@@ -29,6 +29,7 @@ stdio_server_params = StdioServerParameters(
     args=["/Users/raviiyer/dev/mcp-crash-course/servers/math_server.py"],
 )
 
+
 async def main():
     try:
         logger.debug("Starting stdio client")
@@ -42,12 +43,15 @@ async def main():
                 agent = create_react_agent(llm, tools)
                 # logger.debug("Created agent")
 
-                result = await agent.ainvoke({"messages": [HumanMessage(content="What is 100 + 4 / 3?")]})
+                result = await agent.ainvoke(
+                    {"messages": [HumanMessage(content="What is 100 + 4 / 3?")]}
+                )
                 logger.info(f"Result: {result['messages'][-1].content}")
 
     except Exception as e:
         logger.exception("An error occurred:")
         raise
+
 
 if __name__ == "__main__":
     asyncio.run(main())
